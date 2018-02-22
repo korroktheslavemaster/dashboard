@@ -12,7 +12,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import logger from "redux-logger";
 
 const reducer = combineReducers({
-  notices: noticesReducer
+  noticesData: noticesReducer
 });
 const store = createStore(reducer, applyMiddleware(thunk, logger));
 const mql = window.matchMedia(`(min-width: 800px)`);
