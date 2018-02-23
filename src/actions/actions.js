@@ -32,7 +32,7 @@ export var fetchNotices = (noticeType, firstPageOnly = false) => (
     axios
       .get(url)
       .then(response => {
-        const { data, nextPage } = currentTypeNotices;
+        const { data } = currentTypeNotices;
         const parsedNewData = response["data"]["data"].map(notice => ({
           ...notice,
           linkifiedHTML: getLinkifiedHTML(notice)

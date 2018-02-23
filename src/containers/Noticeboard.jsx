@@ -53,16 +53,7 @@ class Noticeboard extends Component {
           </ul>
         </div>
         <div className="notice-list">
-          {data.map((notice, i) => (
-            <Noticecard
-              key={i}
-              // title={notice.title}
-              // time={notice.time}
-              // content={notice.html}
-              // attachment={notice.attachment}
-              {...notice}
-            />
-          ))}
+          {data.map((notice, i) => <Noticecard key={i} {...notice} />)}
           <Waypoint
             onEnter={this._handleWaypointEnter}
             onLeave={this._handleWaypointLeave}
@@ -82,7 +73,7 @@ class Noticeboard extends Component {
   }
 }
 
-Noticeboard = connect(
+export default connect(
   ({ noticesData }) => ({
     ...noticesData
   }),
@@ -91,4 +82,3 @@ Noticeboard = connect(
       dispatch(fetchNotices_(noticeType, firstPageOnly))
   })
 )(Noticeboard);
-export default Noticeboard;

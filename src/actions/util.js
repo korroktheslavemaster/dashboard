@@ -3,14 +3,16 @@ import chrono from "chrono-node";
 
 var buildCalendarEvent = (parsedEvent, title) => {
   let base_url = "https://calendar.google.com/calendar/render?action=TEMPLATE&";
-  let params =
-    "dates=" + parsedEvent.start.moment().format("YYYYMMDD[T]HHmmss[Z]");
-  if (parsedEvent.hasOwnProperty("end")) {
-    params += "/" + parsedEvent.end.moment().format("YYYYMMDD[T]HHmmss[Z]");
-  }
-  params += "&&";
-  params += "text=" + encodeURIComponent(title);
-  return base_url + params;
+  let startDate = parsedEvent.start.moment();
+  let endDate = parsedEvent.end
+    ? parsedEvent.end.moment()
+    : startDate.endOf("day");
+
+  return `${base_url}dates=${startDate.format(
+    "YYYYMMDD[T]HHmmss[Z]"
+  )}/${endDate.format("YYYYMMDD[T]HHmmss[Z]")}&&text=${encodeURIComponent(
+    title
+  )}`;
 };
 
 var parseDateFromText = (textToParse, title) => {
